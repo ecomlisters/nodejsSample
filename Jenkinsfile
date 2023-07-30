@@ -1,14 +1,14 @@
 pipeline{
     agent any
 
-    parameters {
-      gitParameter branch: '', branchFilter: '.*', defaultValue: '', name: 'branchName', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'GitParameterDefinition'
-    }
+   environment {
+     BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+  }
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building from branch ${branchName}'
+                echo 'Building from branch ${BRANCH_NAME}'
             }
         }
         stage('Test') {

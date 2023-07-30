@@ -9,6 +9,7 @@ pipeline{
         stage('Build') {
             steps {
                 echo BRANCH_NAME
+                git branch: BRANCH_NAME, url: 'https://github.com/ecomlisters/nodejsSample'
             }
         }
         stage('Test') {

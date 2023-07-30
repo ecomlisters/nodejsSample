@@ -1,6 +1,6 @@
 const scanner = require('sonarqube-scanner');
 
-console.log('loaded sonar file')
+
 
 scanner(
   {

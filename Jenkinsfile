@@ -8,13 +8,6 @@ pipeline {
       }
     }
 
-    stage('inst') {
-      steps {
-        npm 'install'
-      }
-    }
-
-    
-
+   
   }
 }

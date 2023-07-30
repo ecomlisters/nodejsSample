@@ -1,5 +1,7 @@
 const scanner = require('sonarqube-scanner');
 
+console.log('loaded sonar file')
+
 scanner(
   {
     serverUrl : 'http://localhost:9000/',

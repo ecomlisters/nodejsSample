@@ -17,6 +17,18 @@ pipeline{
                 npm 'install'
             }
         }
+        stage('Sonar'){
+          when {
+            expression {
+              BRANCH_NAME == 'main'
+              }
+          }
+         steps{
+           script{
+              echo 'running Sonar stage ...'
+           }
+         }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'

@@ -1,13 +1,14 @@
-pipeline {
-  agent any
-  stages {
-    stage('build') {
-      steps {
-        echo 'running build'
-        git branch: '${branchName}', changelog: false, poll: false, url: 'https://github.com/ecomlisters/nodejsSample'
-      }
+pipeline{
+    agent any
+    parameters {
+        string(defaultValue: "develop", description: 'enter the branch name to use', name: 'branchName')
     }
-
-   
-  }
+    stages{
+        stage('Checkout'){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: "*/${branchName}"]], gitTool: 'jgit', userRemoteConfigs: [[url: "https://github.com/ecomlisters/nodejsSample"]]])
+                
+            }
+        }
+    }
 }

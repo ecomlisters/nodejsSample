@@ -12,9 +12,9 @@ pipeline{
                 git branch: BRANCH_NAME, url: 'https://github.com/ecomlisters/nodejsSample'
             }
         }
-        stage('Test') {
+        stage('Install') {
             steps {
-                echo 'Testing..'
+                sh: 'npm install'
             }
         }
         stage('Deploy') {

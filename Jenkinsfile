@@ -1,13 +1,24 @@
 pipeline{
     agent any
+
     parameters {
-        string(defaultValue: "develop", description: 'enter the branch name to use', name: 'branchName')
+      gitParameter branch: '', branchFilter: '.*', defaultValue: '', name: 'branchName', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'GitParameterDefinition'
     }
-    stages{
-        stage('Checkout'){
-            steps{
-                checkout([$class: 'GitSCM', branches: [[name: "*/${branchName}"]], gitTool: 'jgit', userRemoteConfigs: [[url: "https://github.com/ecomlisters/nodejsSample"]]])
-                
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building from branch ${branchName}'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }

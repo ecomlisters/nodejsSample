@@ -8,7 +8,7 @@ pipeline{
     stages {
         stage('Build') {
             steps {
-                echo 'Building from branch ${env.BRANCH_NAME}'
+                echo BRANCH_NAME
             }
         }
         stage('Test') {

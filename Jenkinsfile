@@ -14,6 +14,7 @@ pipeline{
         }
         stage('Install') {
             steps {
+                echo "install triggered"
                 npm 'install'
             }
         }

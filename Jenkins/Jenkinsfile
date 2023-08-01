@@ -5,15 +5,27 @@ node {
      sh "git rev-parse --short HEAD > .git/commit-id"
      commit_id = readFile('.git/commit-id').trim()
    }
-   stage('Build') {
+   try{
+    stage('Build') {
      def myTestContainer = docker.image('node:16')
      myTestContainer.pull()
      myTestContainer.inside {
        sh 'npm install'
      }
+    }
+    stage('Testing'){
+      echo 'Running Tests'
+      println('A test has failed!')
+      sh 'exit 1'
+    }
+    stage('Final'){
+        echo 'Pipeline complete'
+    }
+   }catch(e){
+
+    echo currentBuild.result
+    throw e
    }
-   stage('Final'){
-      echo 'Pipeline complete'
-   }
+   
                                
 }                                          

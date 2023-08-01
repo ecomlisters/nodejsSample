@@ -22,9 +22,25 @@ node {
         echo 'Pipeline complete'
     }
    }catch(e){
+      //configure email reciepents
+      def to = emailextrecipients([
+              [$class: 'CulpritsRecipientProvider'],
+              [$class: 'DevelopersRecipientProvider'],
+              [$class: 'RequesterRecipientProvider']
+      ])
+      // mark build as failed
+      currentBuild.result = "FAILURE";
+      // set variables
+      def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
+      def content = '${JELLY_SCRIPT,template="html"}'
 
-    echo currentBuild.result
-    throw e
+      // send email
+      if(to != null && !to.isEmpty()) {
+        emailext(body: content, mimeType: 'text/html',
+          replyTo: '$DEFAULT_REPLYTO', subject: subject,
+          to: to, attachLog: true )
+      }
+      throw e
    }
    
                                

@@ -40,6 +40,8 @@ node {
           replyTo: '$DEFAULT_REPLYTO', subject: subject,
           to: to, attachLog: true )
       }
+
+      //thow error
       throw e
    }
    

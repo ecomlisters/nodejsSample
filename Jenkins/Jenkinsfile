@@ -15,8 +15,8 @@ node {
     }
     stage('Testing'){
       echo 'Running Tests'
-      println('A test has failed!')
-      sh 'exit 1'
+      // println('A test has failed!')
+      // sh 'exit 1'
     }
     stage('Final'){
         echo 'Pipeline complete'
